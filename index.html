@@ -263,7 +263,6 @@
                         <span class="tag">Orden</span>
                         <span class="tag">Trabajo en equipo</span>
                         <span class="tag">Office / Excel / Word</span>
-                        <span class="tag">Inteligencia Artificial</span>
                     </div>
                 </div>
             </div>
@@ -391,6 +390,33 @@
 
     <button class="back-to-top" id="backToTop" aria-label="Volver arriba">&uarr;</button>
 
-    <script src="app.js"></script>
+    <script src="typescript.js"></script>
+    <script type="text/typescript" src="app.ts"></script>
+    <script>
+        +function () {
+            if (typeof ts === "undefined") {
+                console.error("TypeScript no se pudo cargar (revisa tu conexión).");
+                return;
+            }
+            const run = async () => {
+                const tsScripts = Array.prototype.slice.call(
+                    document.querySelectorAll('script[type="text/typescript"]')
+                );
+                for (const s of tsScripts) {
+                    const src = s.getAttribute("src");
+                    let text = s.textContent || "";
+                    if (src) {
+                        const res = await fetch(src);
+                        text = await res.text();
+                    }
+                    const out = ts.transpile(text, { target: ts.ScriptTarget.ES2020 });
+                    const script = document.createElement("script");
+                    script.text = out;
+                    document.body.appendChild(script);
+                }
+            };
+            run();
+        }();
+    </script>
 </body>
 </html>
