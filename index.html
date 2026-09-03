@@ -230,6 +230,16 @@
                 </div>
 
                 <div class="panel" id="panel-real" role="tabpanel">
+                    <h3 class="block-title">Aptitudes blandas</h3>
+                    <div class="tag-list">
+                        <span class="tag">Atencion al publico</span>
+                        <span class="tag">Resolucion de problemas</span>
+                        <span class="tag">Puntualidad</span>
+                        <span class="tag">Orden</span>
+                        <span class="tag">Trabajo en equipo</span>
+                        <span class="tag">Office / Excel / Word</span>
+                    </div>
+
                     <h3 class="block-title">Experiencia laboral</h3>
                     <div class="card-grid">
                         <article class="card job-card">
@@ -253,16 +263,6 @@
                                 <li>Atencion y asesoramiento al publico.</li>
                             </ul>
                         </article>
-                    </div>
-
-                    <h3 class="block-title">Aptitudes blandas</h3>
-                    <div class="tag-list">
-                        <span class="tag">Atencion al publico</span>
-                        <span class="tag">Resolucion de problemas</span>
-                        <span class="tag">Puntualidad</span>
-                        <span class="tag">Orden</span>
-                        <span class="tag">Trabajo en equipo</span>
-                        <span class="tag">Office / Excel / Word</span>
                     </div>
                 </div>
             </div>
@@ -390,33 +390,6 @@
 
     <button class="back-to-top" id="backToTop" aria-label="Volver arriba">&uarr;</button>
 
-    <script src="typescript.js"></script>
-    <script type="text/typescript" src="app.ts"></script>
-    <script>
-        +function () {
-            if (typeof ts === "undefined") {
-                console.error("TypeScript no se pudo cargar (revisa tu conexión).");
-                return;
-            }
-            const run = async () => {
-                const tsScripts = Array.prototype.slice.call(
-                    document.querySelectorAll('script[type="text/typescript"]')
-                );
-                for (const s of tsScripts) {
-                    const src = s.getAttribute("src");
-                    let text = s.textContent || "";
-                    if (src) {
-                        const res = await fetch(src);
-                        text = await res.text();
-                    }
-                    const out = ts.transpile(text, { target: ts.ScriptTarget.ES2020 });
-                    const script = document.createElement("script");
-                    script.text = out;
-                    document.body.appendChild(script);
-                }
-            };
-            run();
-        }();
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
