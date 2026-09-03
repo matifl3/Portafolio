@@ -3,35 +3,394 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matias Felissia</title>
+    <title>Matías Felissia | Portafolio</title>
+    <link rel="icon" href="Logo.png" type="image/png">
     <link rel="stylesheet" href="style.css">
-    <a href="#Home" class="boton">Incio</a>
-    <a href="#About" class="boton">Sobre mi</a>
-    <a href="#Contact" class="boton">Contacto</a>
 </head>
 <body>
-    <div class="Home">
-        <h1>Hola, soy Matias Felissia</h1>
-        <h2>Tecnico en programacion y Futuro analista de datos</h2>
-        <p>Bienvenido a mi portafolio. Aqui encontraras informacion sobre mi, mi experiencia, mis aptitudes y mis proyectos</p>
-    </div>
+    <header class="navbar" id="navbar">
+        <a href="#home" class="brand">
+            <img src="Logo.png" alt="Logo Matías Felissia" class="brand-logo">
+            <span class="brand-name">Matías Felissia</span>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <nav class="nav-menu" id="navMenu">
+            <a href="#home" class="nav-link active">Inicio</a>
+            <a href="#formacion" class="nav-link">Formación</a>
+            <a href="#mundos" class="nav-link">Mis mundos</a>
+            <a href="#objetivos" class="nav-link">Objetivos</a>
+            <a href="#contacto" class="nav-link">Contacto</a>
+        </nav>
+    </header>
 
-    <div class="About">
-        <h2>Sobre mi</h2>
-        <p>Soy estudiante de la tecnicatura en Programacion en la UTN Mar del plata, con formacion primaria y secundaria en la Escuela Jesus Obrero orientado economia y administracion.
-        Buscando mi primer trabajo en el mundo IT, para poder trabajar en un trabajo de mi interes.
-        </p>
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h1 class="hero-title">Hola, soy <span class="accent">Matías Felissia</span></h1>
+                <p class="hero-subtitle">Técnico en programación</p>
+                <p class="hero-text">
+                    Bienvenido a mi portafolio. Aquí encontrarás información sobre mi formación,
+                    mis proyectos y aptitudes en el mundo IT, y mi experiencia en el mundo real.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#mundos" class="btn btn-primary">Ver proyectos</a>
+                    <a href="#contacto" class="btn btn-outline">Contáctame</a>
+                </div>
+            </div>
+        </section>
 
-    </div>
+        <section class="section" id="formacion">
+            <div class="container">
+                <h2 class="section-title">Mi formación</h2>
+                <p class="section-lead">
+                    Mi formación combina la gestión y administración con el desarrollo de software.
+                </p>
+                <div class="card-grid">
+                    <article class="card">
+                        <h3 class="card-title">Bachiller en Economía y Administración</h3>
+                        <p class="card-subtitle">Institución Jesús Obrero · 2006 - 2020</p>
+                        <p class="card-text">
+                            Formación en economía y administración, que me dio una base sólida
+                            en gestión, organización y atención al cliente.
+                        </p>
+                    </article>
+                    <article class="card">
+                        <h3 class="card-title">Tecnicatura en Programación</h3>
+                        <p class="card-subtitle">UTN Mar del Plata · 2023 - Actualidad</p>
+                        <p class="card-text">
+                            Estudiante avanzado, formándome en desarrollo de software,
+                            bases de datos, arquitectura y metodologías ágiles.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-    <div class="Contact">
-        <h2>Contacto</h2>
-        <button type="button">Instagram</button>
-        <button type="button">Github</button>
-        <button type="button">Gmail</button>
-        <button type="button">Linkedin</button>
-        </div>
+        <section class="section section-alt" id="mundos">
+            <div class="container">
+                <h2 class="section-title">Mis mundos</h2>
+                <p class="section-lead">
+                    Dos lados de mi perfil: mi experiencia y proyectos en el mundo IT, y mi trayectoria
+                    y aptitudes en el mundo real.
+                </p>
 
-    
+                <div class="tabs" role="tablist">
+                    <button type="button" class="tab active" data-panel="it" role="tab" aria-selected="true">Mundo IT</button>
+                    <button type="button" class="tab" data-panel="real" role="tab" aria-selected="false">Mundo Real</button>
+                </div>
+
+                <div class="panel active" id="panel-it" role="tabpanel">
+                    <h3 class="block-title">Aptitudes tecnicas</h3>
+                    <div class="tag-list">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">Java</span>
+                        <span class="tag">Spring Boot</span>
+                        <span class="tag">Hibernate</span>
+                        <span class="tag">C</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">MySQL / SQL</span>
+                        <span class="tag">Git</span>
+                        <span class="tag">Docker</span>
+                        <span class="tag">SCRUM</span>
+                    </div>
+
+                    <h3 class="block-title">Proyectos</h3>
+
+                    <section class="project-section">
+                        <div class="project-header">
+                            <h4 class="project-title">PetCare</h4>
+                            <span class="badge">Backend · Java 21</span>
+                        </div>
+                        <p class="project-description">
+                            Aplicacion web backend para la gestion integral del cuidado de mascotas.
+                            Reune toda la operacion de una veterinaria en una sola aplicacion: administrar
+                            usuarios con autenticacion y roles, registrar mascotas vinculadas a sus duenos
+                            con un historial clinico completo, y operar una tienda de productos.
+                        </p>
+                        <h5 class="project-subtitle">Funcionalidades</h5>
+                        <ul class="project-list">
+                            <li>Usuarios con autenticacion y roles.</li>
+                            <li>Registro de mascotas con historial clinico (vacunas y medicamentos).</li>
+                            <li>Gestion de turnos con profesionales veterinarios.</li>
+                            <li>Tienda de productos con carrito de compras y metodos de pago.</li>
+                            <li>Recordatorios y seguimiento del entrenamiento de las mascotas.</li>
+                            <li>Estadisticas de ganancias y productos mas vendidos.</li>
+                        </ul>
+                        <h5 class="project-subtitle">Stack tecnologico</h5>
+                        <div class="project-stack">
+                            <span class="tag">Spring Boot 4</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">Arquitectura en capas</span>
+                            <span class="tag">DTOs</span>
+                            <span class="tag">Validacion y excepciones</span>
+                        </div>
+                        <a href="https://github.com/matifl3/tpVETCARE" target="_blank" rel="noopener" class="btn btn-ghost">Ver en GitHub</a>
+                    </section>
+
+                    <section class="project-section">
+                        <div class="project-header">
+                            <h4 class="project-title">LFM Nacional</h4>
+                            <span class="badge">Full Stack · Caracter privado</span>
+                        </div>
+                        <p class="project-description">
+                            Plataforma web completa para la administracion de una liga de simracing de
+                            Assetto Corsa (proyecto universitario argentino de caracter privado). Gestiona
+                            pilotos, categorias, campeonatos, carreras e inscripciones, con ingesta
+                            automatica de sesiones reales desde el servidor del juego. Es el proyecto de
+                            mayor alcance: incluye ~28 entidades JPA, mas de 100 requisitos documentados
+                            (RF-001 a RF-100), diagramas UML y despliegue con Docker.
+                        </p>
+                        <h5 class="project-subtitle">Funcionalidades</h5>
+                        <ul class="project-list">
+                            <li>Gestion de pilotos, categorias, campeonatos, carreras e inscripciones.</li>
+                            <li>Ingesta automatica de sesiones reales (JSON de clasificacion y carrera).</li>
+                            <li>Sistema de rating Elo y Safety Rating recalculados automaticamente.</li>
+                            <li>Incidentes con votacion de comisarios y sanciones apelables.</li>
+                            <li>Setups con valoraciones, logros, recompensas y notificaciones.</li>
+                            <li>Panel de administracion con roles USUARIO / ADMIN / COMISARIO.</li>
+                        </ul>
+                        <h5 class="project-subtitle">Stack tecnologico</h5>
+                        <div class="project-stack">
+                            <span class="tag">Spring Boot 4.1</span>
+                            <span class="tag">Java 17</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">Spring Security</span>
+                            <span class="tag">JWT</span>
+                            <span class="tag">SCSS / JavaScript</span>
+                            <span class="tag">Docker</span>
+                        </div>
+                        <a href="https://github.com/matifl3/LFMN" target="_blank" rel="noopener" class="btn btn-ghost">Ver en GitHub</a>
+                    </section>
+
+                    <section class="project-section">
+                        <div class="project-header">
+                            <h4 class="project-title">Pokemon2</h4>
+                            <span class="badge">C · Consola</span>
+                        </div>
+                        <p class="project-description">
+                            Gestor de mazos de cartas coleccionables estilo Pokemon en la consola. Dos
+                            jugadores cargan, muestran, eliminan e intercambian cartas entre distintos
+                            mazos, aplicando en la practica las estructuras de datos estudiadas en la
+                            materia: listas, pilas, colas y arboles binarios.
+                        </p>
+                        <h5 class="project-subtitle">Funcionalidades</h5>
+                        <ul class="project-list">
+                            <li>Carga, muestra, eliminacion e intercambio de cartas entre mazos.</li>
+                            <li>Uso de listas, pilas, colas y arboles binarios para el manejo de datos.</li>
+                            <li>Guardado de la informacion en archivos binarios.</li>
+                            <li>Estadisticas del mazo y menu navegable dibujado con gotoxy.</li>
+                        </ul>
+                        <h5 class="project-subtitle">Stack tecnologico</h5>
+                        <div class="project-stack">
+                            <span class="tag">C</span>
+                            <span class="tag">Estructuras de datos</span>
+                            <span class="tag">Archivos binarios</span>
+                        </div>
+                        <a href="https://github.com/matifl3/pokemon2" target="_blank" rel="noopener" class="btn btn-ghost">Ver en GitHub</a>
+                    </section>
+
+                    <section class="project-section">
+                        <div class="project-header">
+                            <h4 class="project-title">ProyectoProgra1</h4>
+                            <span class="badge">C · Consola · Trabajo grupal</span>
+                        </div>
+                        <p class="project-description">
+                            Plataforma social/foro desarrollada como trabajo grupal de Programacion 1,
+                            construida en C para la consola. Su fin es ejercitar el manejo de estructuras
+                            y persistencia: permite registrar usuarios, publicar temas de interes, valorar
+                            contenidos y gestionar perfiles, todo guardado en archivos binarios.
+                        </p>
+                        <h5 class="project-subtitle">Funcionalidades</h5>
+                        <ul class="project-list">
+                            <li>Registro e inicio de sesion de usuarios.</li>
+                            <li>Roles de administrador y usuario.</li>
+                            <li>Publicacion de temas de interes con likes y puntajes.</li>
+                            <li>Mensajeria interna y gestion de perfiles (alta/baja/modificacion).</li>
+                            <li>Persistencia en archivos binarios y menus dibujados con gotoxy.</li>
+                        </ul>
+                        <h5 class="project-subtitle">Stack tecnologico</h5>
+                        <div class="project-stack">
+                            <span class="tag">C</span>
+                            <span class="tag">Archivos binarios</span>
+                            <span class="tag">Manejo de perfiles</span>
+                        </div>
+                        <a href="https://github.com/matifl3/proyectoprogra1" target="_blank" rel="noopener" class="btn btn-ghost">Ver en GitHub</a>
+                    </section>
+
+                    <div class="center">
+                        <a href="https://github.com/matifl3" target="_blank" rel="noopener" class="btn btn-outline">Ver mi GitHub completo</a>
+                    </div>
+                </div>
+
+                <div class="panel" id="panel-real" role="tabpanel">
+                    <h3 class="block-title">Experiencia laboral</h3>
+                    <div class="card-grid">
+                        <article class="card job-card">
+                            <span class="badge">Oct 2023 - Mar 2025</span>
+                            <h3 class="card-title">Verduleria "Apolonia"</h3>
+                            <p class="card-subtitle">Atencion al cliente y manejo de caja</p>
+                            <ul class="card-list">
+                                <li>Atencion al cliente y manejo de caja.</li>
+                                <li>Reposicion de productos y control de inventario.</li>
+                                <li>Tareas de limpieza y mantenimiento del local.</li>
+                            </ul>
+                        </article>
+
+                        <article class="card job-card">
+                            <span class="badge">Ene-Mar 2023 · Jun 2025 - Actualidad</span>
+                            <h3 class="card-title">Hotel Delfin</h3>
+                            <p class="card-subtitle">Cadete</p>
+                            <ul class="card-list">
+                                <li>Tareas de cadete y limpieza.</li>
+                                <li>Tareas de conserjeria</li>
+                                <li>Atencion y asesoramiento al publico.</li>
+                            </ul>
+                        </article>
+                    </div>
+
+                    <h3 class="block-title">Aptitudes blandas</h3>
+                    <div class="tag-list">
+                        <span class="tag">Atencion al publico</span>
+                        <span class="tag">Resolucion de problemas</span>
+                        <span class="tag">Puntualidad</span>
+                        <span class="tag">Orden</span>
+                        <span class="tag">Trabajo en equipo</span>
+                        <span class="tag">Office / Excel / Word</span>
+                        <span class="tag">Inteligencia Artificial</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="objetivos">
+            <div class="container">
+                <h2 class="section-title">Objetivos</h2>
+                <p class="section-lead">
+                    Mi camino de aprendizaje: lo que ya alcancé y hacia dónde voy.
+                </p>
+
+                <h3 class="block-title">En proceso</h3>
+                <div class="card-grid">
+                    <article class="card objective-card">
+                        <span class="badge badge-progress">En proceso</span>
+                        <h3 class="card-title">Analista de datos</h3>
+                        <p class="card-text">
+                            Próximo destino: formarme como analista de datos y trabajar con
+                            información para tomar decisiones.
+                        </p>
+                    </article>
+
+                    <article class="card objective-card">
+                        <span class="badge badge-progress">En proceso</span>
+                        <h3 class="card-title">Tecnicatura en Programación</h3>
+                        <p class="card-text">
+                            Estudiante de la UTN Mar del Plata, trabajando para
+                            finalizar las ultimas 5 materias de la tecnicatura.
+                        </p>
+                    </article>
+
+                    <article class="card objective-card">
+                        <span class="badge badge-progress">En proceso</span>
+                        <h3 class="card-title">Docker</h3>
+                        <p class="card-text">
+                            Expandir el manejo de contenedores y despliegue de aplicaciones.
+                        </p>
+                    </article>
+
+                    <article class="card objective-card">
+                        <span class="badge badge-progress">En proceso</span>
+                        <h3 class="card-title">TypeScript</h3>
+                        <p class="card-text">
+                            Profundizar el tipado y el desarrollo frontend tipado.
+                        </p>
+                    </article>
+
+                    <article class="card objective-card">
+                        <span class="badge badge-progress">En proceso</span>
+                        <h3 class="card-title">Python</h3>
+                        <p class="card-text">
+                            Avanzar en el análisis de datos.
+                        </p>
+                    </article>
+                </div>
+
+                <h3 class="block-title">Completados</h3>
+                <div class="card-grid">
+                    <article class="card objective-card">
+                        <span class="badge badge-done">Completado</span>
+                        <h3 class="card-title">Bachiller en Economía y Administración</h3>
+                        <p class="card-text">Institución Jesús Obrero.</p>
+                    </article>
+
+                    <article class="card objective-card">
+                        <span class="badge badge-done">Completado</span>
+                        <h3 class="card-title">HTML, CSS y JavaScript</h3>
+                        <p class="card-text">Bases de desarrollo web.</p>
+                    </article>
+
+                    <article class="card objective-card">
+                        <span class="badge badge-done">Completado</span>
+                        <h3 class="card-title">Java y Spring Boot</h3>
+                        <p class="card-text">Desarrollo backend con Hibernate.</p>
+                    </article>
+
+                    <article class="card objective-card">
+                        <span class="badge badge-done">Completado</span>
+                        <h3 class="card-title">C</h3>
+                        <p class="card-text">Programación estructurada y estructuras de datos.</p>
+                    </article>
+
+                    <article class="card objective-card">
+                        <span class="badge badge-done">Completado</span>
+                        <h3 class="card-title">MySQL / SQL</h3>
+                        <p class="card-text">Bases de datos relacionales.</p>
+                    </article>
+
+                    <article class="card objective-card">
+                        <span class="badge badge-done">Completado</span>
+                        <h3 class="card-title">Git</h3>
+                        <p class="card-text">Control de versiones.</p>
+                    </article>
+
+                    <article class="card objective-card">
+                        <span class="badge badge-done">Completado</span>
+                        <h3 class="card-title">SCRUM</h3>
+                        <p class="card-text">Metodologías ágiles.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt" id="contacto">
+            <div class="container">
+                <h2 class="section-title">Contacto</h2>
+                <p class="section-lead">
+                    ¿Querés ponerte en contacto conmigo? Podés hacerlo por cualquiera de estos medios.
+                </p>
+                <div class="contact-grid">
+                    <a href="https://www.linkedin.com/in/matias-felissia-b908841aa/" target="_blank" rel="noopener" class="contact-card">Linkedin</a>
+                    <a href="https://github.com/matifl3" target="_blank" rel="noopener" class="contact-card">GitHub</a>
+                    <a href="mailto:matifelissia2205@gmail.com" class="contact-card">Gmail</a>
+                    <a href="https://wa.me/5492235391618" target="_blank" rel="noopener" class="contact-card">WhatsApp</a>
+                    <a href="https://www.instagram.com/matifl_/" target="_blank" rel="noopener" class="contact-card">Instagram</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Matías Felissia. Todos los derechos reservados.</p>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Volver arriba">&uarr;</button>
+
+    <script src="app.js"></script>
 </body>
 </html>
