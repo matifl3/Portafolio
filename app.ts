@@ -47,6 +47,9 @@ function onScroll(): void {
     const shouldShow: boolean = window.scrollY > 400;
     backToTop.classList.toggle("visible", shouldShow);
 
+    const atBottom: boolean =
+        window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+
     const scrollPos: number = window.scrollY + 120;
 
     navLinks.forEach((link) => {
@@ -55,9 +58,15 @@ function onScroll(): void {
         const target = document.querySelector<HTMLElement>(targetId);
         if (!target) return;
 
-        const top: number = target.offsetTop;
-        const height: number = target.offsetHeight;
-        const inRange: boolean = scrollPos >= top && scrollPos < top + height;
+        let inRange: boolean;
+
+        if (atBottom) {
+            inRange = link === navLinks[navLinks.length - 1];
+        } else {
+            const top: number = target.offsetTop;
+            const height: number = target.offsetHeight;
+            inRange = scrollPos >= top && scrollPos < top + height;
+        }
         link.classList.toggle("active", inRange);
     });
 }
