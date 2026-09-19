@@ -117,10 +117,11 @@ revealTargets.forEach((el) => {
 function initParticles() {
     const canvasEl = document.querySelector("#particles");
     const heroEl = document.querySelector(".hero");
-    if (!canvasEl || !heroEl)
+    const zoneEl = document.querySelector(".particle-zone");
+    if (!canvasEl || !heroEl || !zoneEl)
         return;
     const canvas = canvasEl;
-    const hero = heroEl;
+    const zone = zoneEl;
     const ctxEl = canvas.getContext("2d");
     if (!ctxEl)
         return;
@@ -132,7 +133,7 @@ function initParticles() {
     let height = 0;
     const dpr = window.devicePixelRatio || 1;
     function resize() {
-        const rect = canvas.getBoundingClientRect();
+        const rect = zone.getBoundingClientRect();
         width = rect.width;
         height = rect.height;
         canvas.width = Math.round(width * dpr);
