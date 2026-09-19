@@ -54,6 +54,8 @@ function onScroll(): void {
     const shouldShow: boolean = window.scrollY > 400;
     backToTop.classList.toggle("visible", shouldShow);
 
+    navbar?.classList.toggle("scrolled", window.scrollY > 10);
+
     const atBottom: boolean =
         window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
 
@@ -115,6 +117,27 @@ function initGalleryArrows(): void {
 }
 
 initGalleryArrows();
+
+const revealObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    },
+    { rootMargin: "0px 0px -60px 0px", threshold: 0 }
+);
+
+const revealTargets = document.querySelectorAll<HTMLElement>(
+    ".hero-content, .section-title, .section-lead, .block-title, .card, .project-section, .contact-card, .tabs, .center"
+);
+
+revealTargets.forEach((el) => {
+    el.classList.add("reveal");
+    revealObserver.observe(el);
+});
 
 const lightbox = document.querySelector<HTMLElement>("#lightbox");
 const lightboxImg = document.querySelector<HTMLImageElement>("#lightboxImg");
