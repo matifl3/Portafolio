@@ -130,69 +130,25 @@ ul {
 }
 
 /* ============ HERO ============ */
-.hero {
+.particle-zone {
     position: relative;
-    overflow: hidden;
+}
+
+#particles {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 6rem 2rem 3rem;
-    background:
-        radial-gradient(ellipse at top, rgba(225, 6, 0, 0.15), transparent 55%),
-        var(--bg-primary);
-}
-
-.hero-blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    pointer-events: none;
-    z-index: 0;
-    will-change: transform;
-}
-
-.hero-blob--1 {
-    width: 480px;
-    height: 480px;
-    background: rgba(225, 6, 0, 0.32);
-    top: -140px;
-    left: -120px;
-    animation: blobFloat1 18s ease-in-out infinite;
-}
-
-.hero-blob--2 {
-    width: 420px;
-    height: 420px;
-    background: rgba(59, 130, 246, 0.16);
-    bottom: -160px;
-    right: -120px;
-    animation: blobFloat2 22s ease-in-out infinite;
-}
-
-.hero-blob--3 {
-    width: 320px;
-    height: 320px;
-    background: rgba(255, 107, 53, 0.14);
-    bottom: 12%;
-    left: 55%;
-    animation: blobFloat3 26s ease-in-out infinite;
-}
-
-@keyframes blobFloat1 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(70px, 50px) scale(1.15); }
-}
-
-@keyframes blobFloat2 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(-60px, -40px) scale(1.1); }
-}
-
-@keyframes blobFloat3 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(-40px, 30px) scale(1.2); }
+    background: radial-gradient(ellipse at top, rgba(225, 6, 0, 0.15), transparent 55%);
 }
 
 .hero-content {
@@ -811,10 +767,6 @@ body.no-scroll {
     }
 
     .navbar {
-        animation: none;
-    }
-
-    .hero-blob {
         animation: none;
     }
 

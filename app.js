@@ -114,6 +114,77 @@ revealTargets.forEach((el) => {
     el.classList.add("reveal");
     revealObserver.observe(el);
 });
+function initParticles() {
+    const canvasEl = document.querySelector("#particles");
+    const heroEl = document.querySelector(".hero");
+    if (!canvasEl || !heroEl)
+        return;
+    const canvas = canvasEl;
+    const hero = heroEl;
+    const ctxEl = canvas.getContext("2d");
+    if (!ctxEl)
+        return;
+    const ctx = ctxEl;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+        return;
+    let particles = [];
+    let width = 0;
+    let height = 0;
+    const dpr = window.devicePixelRatio || 1;
+    function resize() {
+        const rect = canvas.getBoundingClientRect();
+        width = rect.width;
+        height = rect.height;
+        canvas.width = Math.round(width * dpr);
+        canvas.height = Math.round(height * dpr);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const count = Math.min(Math.floor((width * height) / 2200), 500);
+        particles = Array.from({ length: Math.max(count, 1) }, () => {
+            const d = Math.random() * 0.7 + 0.3;
+            return {
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.4 * d,
+                vy: (Math.random() - 0.5) * 0.4 * d,
+                r: (Math.random() * 1.6 + 0.5) * d,
+                d,
+                accent: Math.random() < 0.25,
+                tw: Math.random() * Math.PI * 2,
+                twSpeed: Math.random() * 0.02 + 0.005,
+            };
+        });
+    }
+    function draw() {
+        ctx.clearRect(0, 0, width, height);
+        particles.forEach((p) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.tw += p.twSpeed;
+            if (p.x < -20)
+                p.x = width + 20;
+            if (p.x > width + 20)
+                p.x = -20;
+            if (p.y < -20)
+                p.y = height + 20;
+            if (p.y > height + 20)
+                p.y = -20;
+            const alpha = 0.25 + p.d * (0.4 + (Math.sin(p.tw) + 1) * 0.25);
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = p.accent
+                ? `rgba(225, 6, 0, ${alpha})`
+                : `rgba(245, 245, 247, ${alpha})`;
+            ctx.fill();
+        });
+        requestAnimationFrame(draw);
+    }
+    resize();
+    draw();
+    window.addEventListener("resize", resize);
+}
+initParticles();
 const lightbox = document.querySelector("#lightbox");
 const lightboxImg = document.querySelector("#lightboxImg");
 const lightboxClose = document.querySelector("#lightboxClose");
