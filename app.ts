@@ -26,6 +26,13 @@ tabs.forEach((tab) => {
     tab.addEventListener("click", () => switchTab(tab));
 });
 
+document.querySelectorAll<HTMLAnchorElement>('a[href="#proyectos"]').forEach((anchor) => {
+    anchor.addEventListener("click", () => {
+        const itTab = document.querySelector<HTMLButtonElement>('.tab[data-panel="it"]');
+        if (itTab) switchTab(itTab);
+    });
+});
+
 function toggleMenu(force?: boolean): void {
     if (!navToggle || !navMenu) return;
     const open: boolean = force !== undefined ? force : !navMenu.classList.contains("open");
@@ -81,3 +88,104 @@ window.addEventListener("scroll", onScroll, { passive: true });
 window.addEventListener("resize", onScroll);
 
 onScroll();
+
+function initGalleryArrows(): void {
+    document.querySelectorAll<HTMLElement>(".project-gallery-wrap").forEach((wrap) => {
+        const gallery = wrap.querySelector<HTMLElement>(".project-gallery");
+        const prev = wrap.querySelector<HTMLButtonElement>(".gallery-prev");
+        const next = wrap.querySelector<HTMLButtonElement>(".gallery-next");
+        if (!gallery || !prev || !next) return;
+
+        const updateArrows = (): void => {
+            prev.disabled = gallery.scrollLeft <= 2;
+            next.disabled = gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 2;
+        };
+
+        const scrollByStep = (dir: number): void => {
+            gallery.scrollBy({ left: dir * gallery.clientWidth * 0.8, behavior: "smooth" });
+        };
+
+        prev.addEventListener("click", () => scrollByStep(-1));
+        next.addEventListener("click", () => scrollByStep(1));
+        gallery.addEventListener("scroll", updateArrows, { passive: true });
+        window.addEventListener("resize", updateArrows);
+
+        updateArrows();
+    });
+}
+
+initGalleryArrows();
+
+const lightbox = document.querySelector<HTMLElement>("#lightbox");
+const lightboxImg = document.querySelector<HTMLImageElement>("#lightboxImg");
+const lightboxClose = document.querySelector<HTMLButtonElement>("#lightboxClose");
+const lightboxPrev = document.querySelector<HTMLButtonElement>("#lightboxPrev");
+const lightboxNext = document.querySelector<HTMLButtonElement>("#lightboxNext");
+
+let lightboxImages: HTMLImageElement[] = [];
+let lightboxIndex: number = 0;
+
+function updateLightbox(): void {
+    const img = lightboxImages[lightboxIndex];
+    if (!img || !lightboxImg) return;
+    lightboxImg.src = img.getAttribute("src") ?? "";
+    lightboxImg.alt = img.alt || "Captura ampliada";
+    if (lightboxPrev) lightboxPrev.disabled = lightboxIndex <= 0;
+    if (lightboxNext) lightboxNext.disabled = lightboxIndex >= lightboxImages.length - 1;
+}
+
+function openLightbox(img: HTMLImageElement): void {
+    const gallery = img.closest<HTMLElement>(".project-gallery");
+    lightboxImages = gallery
+        ? Array.from(gallery.querySelectorAll<HTMLImageElement>(".project-image"))
+        : [img];
+    lightboxIndex = lightboxImages.indexOf(img);
+    updateLightbox();
+    lightbox?.classList.add("open");
+    lightbox?.setAttribute("aria-hidden", "false");
+    document.body.classList.add("no-scroll");
+}
+
+function closeLightbox(): void {
+    lightbox?.classList.remove("open");
+    lightbox?.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("no-scroll");
+}
+
+document.querySelectorAll<HTMLImageElement>(".project-image").forEach((img) => {
+    img.style.cursor = "zoom-in";
+    img.addEventListener("click", () => openLightbox(img));
+});
+
+lightboxClose?.addEventListener("click", closeLightbox);
+
+lightboxPrev?.addEventListener("click", () => {
+    if (lightboxIndex > 0) {
+        lightboxIndex--;
+        updateLightbox();
+    }
+});
+
+lightboxNext?.addEventListener("click", () => {
+    if (lightboxIndex < lightboxImages.length - 1) {
+        lightboxIndex++;
+        updateLightbox();
+    }
+});
+
+lightbox?.addEventListener("click", (e) => {
+    if (e.target === lightbox) closeLightbox();
+});
+
+window.addEventListener("keydown", (e) => {
+    if (!lightbox?.classList.contains("open")) return;
+    if (e.key === "Escape") {
+        closeLightbox();
+    } else if (e.key === "ArrowLeft" && lightboxIndex > 0) {
+        lightboxIndex--;
+        updateLightbox();
+    } else if (e.key === "ArrowRight" && lightboxIndex < lightboxImages.length - 1) {
+        lightboxIndex++;
+        updateLightbox();
+    }
+});
