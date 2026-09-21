@@ -134,7 +134,8 @@ ul {
     position: relative;
 }
 
-#particles {
+#particles,
+.particles {
     position: absolute;
     inset: 0;
     z-index: -1;
@@ -754,6 +755,7 @@ body.no-scroll {
 
 /* ============ FOOTER ============ */
 .footer {
+    position: relative;
     border-top: 1px solid var(--border);
     text-align: center;
     padding: 1.5rem;
