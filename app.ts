@@ -300,3 +300,41 @@ window.addEventListener("keydown", (e) => {
         updateLightbox();
     }
 });
+
+function initHeroTyping(): void {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const title = document.querySelector<HTMLElement>(".hero-title");
+    if (!title || title.dataset["typed"]) return;
+
+    title.classList.add("typing-wrap");
+    title.dataset["typed"] = "true";
+
+    const wrap = (node: Node): void => {
+        if (node.nodeType === Node.TEXT_NODE && node.textContent) {
+            const frag = document.createDocumentFragment();
+            for (const ch of node.textContent) {
+                const span = document.createElement("span");
+                span.className = "typing-char";
+                span.textContent = ch === " " ? "\u00A0" : ch;
+                frag.appendChild(span);
+            }
+            node.parentNode?.replaceChild(frag, node);
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+            Array.from(node.childNodes).forEach(wrap);
+        }
+    };
+
+    Array.from(title.childNodes).forEach(wrap);
+
+    const chars = Array.from(title.querySelectorAll<HTMLElement>(".typing-char"));
+    chars.forEach((char, i) => {
+        char.style.transitionDelay = `${(0.03 * i + 0.15).toFixed(3)}s`;
+    });
+
+    requestAnimationFrame(() => {
+        title.classList.add("typing-done");
+    });
+}
+
+initHeroTyping();
