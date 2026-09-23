@@ -131,12 +131,24 @@ const revealObserver = new IntersectionObserver(
 );
 
 const revealTargets = document.querySelectorAll<HTMLElement>(
-    ".hero-content, .section-title, .section-lead, .block-title, .card, .project-section, .contact-card, .tabs, .center"
+    ".section-title, .section-lead, .block-title, .card, .project-section, .contact-card, .tabs, .center"
 );
 
 revealTargets.forEach((el) => {
-    el.classList.add("reveal");
-    revealObserver.observe(el);
+    const target = el as HTMLElement;
+    if (target.classList.contains("card") && target.parentElement && target.parentElement.classList.contains("card-grid")) {
+        const idx = Array.prototype.indexOf.call(target.parentElement.children, target);
+        target.style.transitionDelay = `${(0.04 * idx).toFixed(2)}s`;
+        target.addEventListener(
+            "transitionend",
+            (e) => {
+                if (e.propertyName === "transform") target.style.transitionDelay = "";
+            },
+            { once: true }
+        );
+    }
+    target.classList.add("reveal");
+    revealObserver.observe(target);
 });
 
 function initParticles(): void {

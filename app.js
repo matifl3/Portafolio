@@ -109,10 +109,19 @@ const revealObserver = new IntersectionObserver((entries) => {
         }
     });
 }, { rootMargin: "0px 0px -60px 0px", threshold: 0 });
-const revealTargets = document.querySelectorAll(".hero-content, .section-title, .section-lead, .block-title, .card, .project-section, .contact-card, .tabs, .center");
+const revealTargets = document.querySelectorAll(".section-title, .section-lead, .block-title, .card, .project-section, .contact-card, .tabs, .center");
 revealTargets.forEach((el) => {
-    el.classList.add("reveal");
-    revealObserver.observe(el);
+    const target = el;
+    if (target.classList.contains("card") && target.parentElement && target.parentElement.classList.contains("card-grid")) {
+        const idx = Array.prototype.indexOf.call(target.parentElement.children, target);
+        target.style.transitionDelay = `${(0.04 * idx).toFixed(2)}s`;
+        target.addEventListener("transitionend", (e) => {
+            if (e.propertyName === "transform")
+                target.style.transitionDelay = "";
+        }, { once: true });
+    }
+    target.classList.add("reveal");
+    revealObserver.observe(target);
 });
 function initParticles() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
